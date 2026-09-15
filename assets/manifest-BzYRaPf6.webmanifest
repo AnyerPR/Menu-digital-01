@@ -1,0 +1,17 @@
+{
+  "name": "Food Truck KimerA",
+  "short_name": "KimerA",
+  "description": "Menu digital y pedidos por WhatsApp para Food Truck KimerA.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "./images/logo.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
