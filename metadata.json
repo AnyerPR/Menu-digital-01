@@ -1,0 +1,7 @@
+{
+  "name": "Food Truck KimerA",
+  "description": "Menú digital y pedidos por WhatsApp para Food Truck KimerA: hamburguesas, chimi sandwiches, yaroas y wraps burritos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
