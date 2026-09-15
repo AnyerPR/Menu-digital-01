@@ -437,6 +437,9 @@ function renderProducts() {
       <div class="product-image-container">
         <span class="product-category-tag">${escapeHtml(prodCategory)}</span>
         ${!isAvailable ? '<span class="badge-soldout">Agotado</span>' : ""}
+        <button type="button" class="btn-share-product" data-id="${prodId}" aria-label="Compartir ${escapeHtml(prodName)}">
+          <span>↗</span>
+        </button>
         <img
           src="${escapeHtml(prodImage)}"
           alt="${escapeHtml(prodName)}"
@@ -532,6 +535,96 @@ function renderProductActionBtn(productId, quantity, isAvailable) {
   `;
 }
 
+function buildProductShareUrl(product) {
+  const productId = product && (product.id ?? product.slug ?? product.nombre);
+  const baseOrigin = window.location.origin || "http://localhost:3000";
+  return `${baseOrigin}/producto/${encodeURIComponent(String(productId))}`;
+}
+
+function updateProductMetaTags(product) {
+  const cfg = getActiveConfig();
+  const productName = product?.nombre || product?.name || "Producto";
+  const productDescription = product?.descripcion || product?.description || "Producto disponible en el menú.";
+  const productImage = product?.imagen || product?.image || FALLBACK_IMAGE_SVG;
+  const productUrl = buildProductShareUrl(product);
+  const absoluteImage = /^https?:\/\//i.test(productImage)
+    ? productImage
+    : new URL(productImage.replace(/^\/+/, ""), window.location.origin + "/").toString();
+
+  const setMeta = (selector, attributeName, attributeValue, contentValue) => {
+    let tag = document.head.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute(attributeName, attributeValue);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", contentValue);
+  };
+
+  document.title = `${productName} | ${cfg.nombreNegocio || "Menú Digital"}`;
+
+  setMeta("meta[property='og:type']", "property", "og:type", "product");
+  setMeta("meta[property='og:title']", "property", "og:title", productName);
+  setMeta("meta[property='og:description']", "property", "og:description", productDescription);
+  setMeta("meta[property='og:image']", "property", "og:image", absoluteImage);
+  setMeta("meta[property='og:url']", "property", "og:url", productUrl);
+  setMeta("meta[property='og:site_name']", "property", "og:site_name", cfg.nombreNegocio || "Menú Digital");
+  setMeta("meta[property='og:image:width']", "property", "og:image:width", "1200");
+  setMeta("meta[property='og:image:height']", "property", "og:image:height", "630");
+  setMeta("meta[property='og:price:amount']", "property", "og:price:amount", String(product?.precio || product?.price || 0));
+  setMeta("meta[property='og:price:currency']", "property", "og:price:currency", "DOP");
+
+  setMeta("meta[name='twitter:card']", "name", "twitter:card", "summary_large_image");
+  setMeta("meta[name='twitter:title']", "name", "twitter:title", productName);
+  setMeta("meta[name='twitter:description']", "name", "twitter:description", productDescription);
+  setMeta("meta[name='twitter:image']", "name", "twitter:image", absoluteImage);
+  setMeta("meta[name='twitter:image:alt']", "name", "twitter:image:alt", productName);
+}
+
+async function shareProduct(product) {
+  const cfg = getActiveConfig();
+  const shareUrl = buildProductShareUrl(product);
+  const productName = product?.nombre || product?.name || "Producto";
+
+  const shareData = {
+    title: `${productName} | ${cfg.nombreNegocio || "Menú Digital"}`,
+    text: `Mira ${productName} en ${cfg.nombreNegocio || "nuestro menú"}.`,
+    url: shareUrl
+  };
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData);
+      showToast("✅ Producto compartido");
+      return;
+    }
+  } catch (error) {
+    if (error && error.name === "AbortError") return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(shareUrl);
+    showToast("🔗 Enlace copiado al portapapeles");
+    return;
+  } catch (error) {
+    console.warn("No se pudo copiar el enlace automáticamente:", error);
+  }
+
+  window.prompt("Copia este enlace para compartirlo:", shareUrl);
+}
+
+function handleProductShareClick(event) {
+  const shareBtn = event.currentTarget;
+  const productId = Number(shareBtn.dataset.id);
+  const product = getActiveProducts().find(item => Number(item.id) === productId);
+
+  if (!product) return;
+
+  event.stopPropagation();
+  updateProductMetaTags(product);
+  shareProduct(product);
+}
+
 /**
  * Enlaza eventos a los botones de las tarjetas de producto
  */
@@ -555,6 +648,10 @@ function bindProductCardEvents() {
       const id = parseInt(btn.dataset.id, 10);
       updateQuantity(id, -1);
     });
+  });
+
+  document.querySelectorAll(".btn-share-product").forEach(btn => {
+    btn.addEventListener("click", handleProductShareClick);
   });
 
   const backdrop = document.getElementById("productDetailBackdrop");

@@ -22,14 +22,14 @@ const CONFIG = {
     // 2. CONFIGURACIÓN DEL DELIVERY
     delivery: {
         activo: true,            // true = se cobra delivery / false = no se cobra (o solo retiro)
-        costo: 100,              // Costo estándar de envío
-        gratis: false,           // true = delivery gratis para todos los pedidos
+        costo: 0,              // Costo estándar de envío
+        gratis: true,           // true = delivery gratis para todos los pedidos
         gratisDesde: 1500        // Monto mínimo para delivery gratis. Pon 0 o null si no aplica
     },
 
     // Atajos directos para mayor compatibilidad
-    costoDelivery: 100,
-    deliveryGratis: false,
+    costoDelivery: 0,
+    deliveryGratis: true,
     deliveryGratisDesde: 1500,
 
     // 3. MENSAJE INICIAL AL ABRIR WHATSAPP
