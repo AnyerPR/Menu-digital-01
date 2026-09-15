@@ -147,6 +147,15 @@ function initApp() {
   updateCartUI();
   restoreSavedUserInfo();
   bindGlobalEvents();
+
+  const productIdFromUrl = getProductIdFromRoute();
+  if (productIdFromUrl) {
+    const product = getActiveProducts().find(item => String(item.id) === String(productIdFromUrl));
+    if (product) {
+      updateProductMetaTags(product);
+      openProductDetail(product);
+    }
+  }
 }
 
 /**
@@ -535,9 +544,36 @@ function renderProductActionBtn(productId, quantity, isAvailable) {
   `;
 }
 
+function getProductIdFromRoute() {
+  const params = new URLSearchParams(window.location.search || "");
+  const candidates = [];
+
+  if (params.has("product")) candidates.push(params.get("product"));
+  if (params.has("productId")) candidates.push(params.get("productId"));
+
+  const hash = window.location.hash || "";
+  const hashMatch = hash.match(/#\/?(?:producto|product)\/(.+)$/i);
+  if (hashMatch && hashMatch[1]) candidates.push(hashMatch[1]);
+
+  const pathMatch = window.location.pathname.match(/\/+(?:producto|product)\/(.+)$/i);
+  if (pathMatch && pathMatch[1]) candidates.push(pathMatch[1]);
+
+  const rawValue = candidates.find(Boolean);
+  if (!rawValue) return null;
+
+  const value = decodeURIComponent(String(rawValue)).trim();
+  return value || null;
+}
+
 function buildProductShareUrl(product) {
   const productId = product && (product.id ?? product.slug ?? product.nombre);
-  const baseOrigin = window.location.origin || "http://localhost:3000";
+  const baseOrigin = window.location.origin || "https://anyerpr.github.io";
+  const isGithubPages = /github\.io/i.test(baseOrigin) || /github\.io/i.test(window.location.hostname || "");
+
+  if (isGithubPages) {
+    return `${baseOrigin}/?product=${encodeURIComponent(String(productId))}`;
+  }
+
   return `${baseOrigin}/producto/${encodeURIComponent(String(productId))}`;
 }
 
