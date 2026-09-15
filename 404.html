@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirigiendo...</title>
+    <script>
+      (function () {
+        const path = window.location.pathname || '/';
+        const match = path.match(/\/?(?:producto|product)\/(.+)$/i);
+        const productId = match && match[1] ? match[1] : null;
+
+        const origin = window.location.origin || 'https://anyerpr.github.io';
+        const redirectUrl = productId
+          ? `${origin}/?product=${encodeURIComponent(productId)}`
+          : `${origin}/`;
+
+        window.location.replace(redirectUrl);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Redirigiendo...</p>
+  </body>
+</html>

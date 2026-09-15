@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Truck KimerA | Menú Digital</title>
+    <meta name="description" content="Menú digital oficial de Food Truck KimerA. Hamburguesas, Chimi Sandwiches, Yaroas y Wraps Burritos con pedidos directos a WhatsApp." />
+    
+    <!-- Open Graph / Redes Sociales -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Food Truck KimerA | Menú Digital" />
+    <meta property="og:description" content="Pide las mejores hamburguesas, chimis, yaroas y wraps burritos con entrega a domicilio directa a WhatsApp." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" />
+    <meta property="og:url" content="/" />
+    <meta property="og:site_name" content="Food Truck KimerA" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Food Truck KimerA | Menú Digital" />
+    <meta name="twitter:description" content="Pide las mejores hamburguesas, chimis, yaroas y wraps burritos con entrega a domicilio directa a WhatsApp." />
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" />
+
+    <!-- Favicon con Emoji SVG (Sin dependencias externas) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>" />
+
+    <!-- Hoja de Estilos -->
+    <link rel="stylesheet" crossorigin href="/Menu-digital-01/assets/index-D4flNFjW.css">
+  </head>
+  <body>
+
+    <!-- Encabezado Principal / Barra Superior -->
+    <header class="site-header" id="mainHeader">
+      <div class="container header-container">
+        <a href="#" class="brand-wrapper" id="brandLink" aria-label="Ir al inicio del menú">
+          <div class="brand-logo-badge" id="brandLogo">🍔</div>
+          <div class="brand-info">
+            <span class="brand-title" id="brandTitle">Burger & Bites</span>
+            <div class="brand-status">
+              <span class="status-dot"></span>
+              <span>Abierto • Solo Delivery</span>
+            </div>
+          </div>
+        </a>
+
+        <div class="header-actions">
+          <button type="button" class="header-config-btn" id="headerConfigBtn" aria-label="Configuración rápida local">
+            <span>⚙️</span>
+            <span class="config-label">Configuración</span>
+          </button>
+          <button type="button" class="header-cart-btn" id="headerCartBtn" aria-label="Ver carrito de compras">
+            <span>🛒</span>
+            <span class="cart-label">Carrito</span>
+            <span class="cart-counter-badge" id="headerCartBadge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Banner Informativo -->
+    <section class="hero-banner" id="heroBanner">
+      <div class="container hero-content">
+        <h1 class="hero-headline">Pide directo a tu puerta en minutos 🔥</h1>
+        <div class="hero-badges-row">
+          <span class="info-pill highlight">
+            <span>🛵</span>
+            <span>Delivery: <strong id="deliveryFeeDisplay">GRATIS</strong></span>
+          </span>
+          <span class="info-pill">
+            <span>⏱️</span>
+            <span>Entrega: 30 - 45 min</span>
+          </span>
+          <span class="info-pill">
+            <span>🕒</span>
+            <span id="businessHours"> Lunes - Domingo: 5:00 PM - 12:00 PM</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="container">
+
+      <!-- Barra de Búsqueda y Filtros -->
+      <section class="search-filter-section" aria-label="Búsqueda y categorías">
+        <!-- Caja de Búsqueda -->
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="searchInput"
+            class="search-input"
+            placeholder="Buscar hamburguesa, combo, bebida..."
+            autocomplete="off"
+            aria-label="Buscar producto"
+          />
+          <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Limpiar búsqueda">✕</button>
+        </div>
+
+        <!-- Barra Horizontal de Categorías -->
+        <nav class="categories-nav-wrapper" aria-label="Categorías del menú">
+          <div class="categories-bar" id="categoriesBar">
+            <!-- Botones generados dinámicamente desde script.js -->
+          </div>
+        </nav>
+      </section>
+
+      <!-- Encabezado de Sección y Contador -->
+      <div class="section-meta-header">
+        <h2 class="section-title" id="sectionTitle">🍔 Hamburguesas</h2>
+        <span class="items-counter-tag" id="itemsCounter">0 productos</span>
+      </div>
+
+      <!-- Cuadrícula de Productos -->
+      <section class="products-grid" id="productsGrid" aria-label="Catálogo de productos">
+        <!-- Tarjetas generadas dinámicamente desde script.js -->
+      </section>
+
+      <!-- Recuadro de descripción del producto -->
+      <div class="product-detail-backdrop" id="productDetailBackdrop" aria-hidden="true"></div>
+      <div class="product-detail-modal" id="productDetailModal" role="dialog" aria-modal="true" aria-labelledby="productDetailName">
+        <button type="button" class="product-detail-close" id="productDetailClose" aria-label="Cerrar descripción">✕</button>
+        <div class="product-detail-image-wrap">
+          <img id="productDetailImage" src="" alt="" class="product-detail-image" />
+        </div>
+        <div class="product-detail-body">
+          <span class="product-detail-category" id="productDetailCategory">Categoría</span>
+          <h3 class="product-detail-name" id="productDetailName">Nombre del producto</h3>
+          <p class="product-detail-description" id="productDetailDescription">Descripción</p>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Barra Inferior Flotante (Acceso rápido al Carrito en Mobile) -->
+    <aside class="bottom-cart-bar" id="bottomCartBar" aria-label="Resumen rápido del carrito">
+      <div class="bottom-cart-inner">
+        <div class="bottom-cart-info">
+          <span class="bottom-cart-count" id="bottomCartCount">0 productos</span>
+          <span class="bottom-cart-total" id="bottomCartTotal">RD$0</span>
+        </div>
+        <button type="button" class="btn-open-cart" id="bottomOpenCartBtn">
+          <span>Ver mi pedido</span>
+          <span>🛒</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Modal / Drawer Lateral del Carrito y Checkout -->
+    <div class="cart-modal-backdrop" id="cartModalBackdrop" aria-hidden="true"></div>
+    <section class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <!-- Encabezado del Modal -->
+      <header class="drawer-header">
+        <div class="drawer-title-group">
+          <h2 class="drawer-title" id="drawerTitle">Tu Pedido</h2>
+          <span class="drawer-items-badge" id="drawerCartBadge">0 ítems</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Cerrar carrito">✕</button>
+      </header>
+
+      <!-- Cuerpo Scrolleable: Lista de Ítems + Totales + Formulario -->
+      <div class="drawer-body">
+        
+        <!-- Lista de productos añadidos -->
+        <div class="cart-items-list" id="cartItemsList">
+          <!-- Ítems generados dinámicamente -->
+        </div>
+
+        <!-- Desglose de precios -->
+        <div class="pricing-breakdown-card" id="pricingBreakdownCard">
+          <div class="pricing-row">
+            <span>Subtotal:</span>
+            <strong id="checkoutSubtotal">RD$0</strong>
+          </div>
+          <div class="pricing-row">
+            <span>Costo de envío (Delivery):</span>
+            <strong id="checkoutDeliveryFee">RD$150</strong>
+          </div>
+          <div class="pricing-row total-row">
+            <span>Total a pagar:</span>
+            <strong id="checkoutTotal">RD$0</strong>
+          </div>
+        </div>
+
+        <!-- Formulario de Datos para el Delivery -->
+        <div class="checkout-section" id="checkoutSection">
+          <h3 class="checkout-title">
+            <span>📍</span>
+            <span>Datos de Entrega</span>
+          </h3>
+
+          <!-- Mensaje de alerta para validaciones -->
+          <div class="form-alert" id="formAlert" role="alert"></div>
+
+          <form id="checkoutForm" onsubmit="event.preventDefault();">
+            <div class="form-group">
+              <label class="form-label" for="clientName">
+                Nombre y Apellido <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                id="clientName"
+                class="form-input"
+                placeholder="Ej: Juan Pérez"
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="clientPhone">
+                Teléfono de contacto <span class="required-star">*</span>
+              </label>
+              <input
+                type="tel"
+                id="clientPhone"
+                class="form-input"
+                placeholder="Ej: 8094315259"
+                required
+                autocomplete="tel"
+              />
+              <span class="input-hint">Te llamaremos o escribiremos al llegar</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="clientAddress">
+                Dirección exacta (Calle y Número) <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                id="clientAddress"
+                class="form-input"
+                placeholder="Ej: Calle Principal #45, Apto 2B"
+                required
+                autocomplete="street-address"
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="clientSector">
+                Sector o Barrio <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                id="clientSector"
+                class="form-input"
+                placeholder="Ej: Bella Vista / Piantini / Los Prados"
+                required
+              />
+            </div>
+
+            <!-- Método de Pago -->
+            <div class="form-group">
+              <label class="form-label">
+                Método de Pago <span class="required-star">*</span>
+              </label>
+              <div class="payment-methods-grid" id="paymentMethodsContainer">
+                <!-- Opciones generadas dinámicamente -->
+              </div>
+            </div>
+
+            <!-- Notas Adicionales -->
+            <div class="form-group">
+              <label class="form-label" for="clientNotes">
+                Notas o instrucciones especiales
+              </label>
+              <textarea
+                id="clientNotes"
+                class="form-textarea"
+                rows="2"
+                placeholder="Ej: Sin cebolla, tocar timbre, cambio para billete de RD$1,000..."
+              ></textarea>
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Pie del Modal: Botón WhatsApp -->
+      <footer class="drawer-footer">
+        <button type="button" class="btn-send-whatsapp" id="btnSendWhatsapp">
+          <svg class="whatsapp-icon-svg" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.086s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.112.551 4.095 1.517 5.821l-1.611 5.889 6.04-1.585c1.669.91 3.578 1.425 5.608 1.425 6.627 0 12-5.373 12-12s-5.373-12-12-12z"/>
+          </svg>
+          <span>Enviar pedido por WhatsApp</span>
+        </button>
+        <div class="drawer-secure-note">
+          <span>🔒</span>
+          <span>Se abrirá tu WhatsApp con el mensaje listo para enviar</span>
+        </div>
+      </footer>
+    </section>
+
+    <!-- Recuadro / Modal de Clave para Configuración -->
+    <div class="auth-modal-backdrop" id="authModalBackdrop" aria-hidden="true"></div>
+    <div class="auth-dialog" id="authDialog" role="dialog" aria-modal="true" aria-labelledby="authDialogTitle">
+      <div class="auth-dialog-header">
+        <div class="auth-header-title-box">
+          <span class="auth-icon-badge">🔐</span>
+          <h3 class="auth-dialog-title" id="authDialogTitle">Acceso de Administración</h3>
+        </div>
+        <button type="button" class="auth-close-btn" id="authCloseBtn" aria-label="Cerrar ventana de clave">✕</button>
+      </div>
+      <form id="authForm" onsubmit="event.preventDefault();">
+        <div class="auth-dialog-body">
+          <p class="auth-dialog-desc">Ingresa la clave de administrador para acceder y modificar la configuración del menú y del negocio.</p>
+          
+          <div class="form-group">
+            <label class="form-label" for="adminPasswordInput">Contraseña de Administrador</label>
+            <div class="auth-input-wrapper">
+              <input 
+                type="password" 
+                id="adminPasswordInput" 
+                class="form-input" 
+                placeholder="Ingresa la clave..." 
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="btn-toggle-password" id="btnTogglePassword" aria-label="Mostrar u ocultar contraseña">
+                👁️
+              </button>
+            </div>
+            <div class="auth-error-msg" id="authErrorMsg">⚠️ Clave incorrecta. Inténtalo de nuevo.</div>
+          </div>
+        </div>
+
+        <div class="auth-dialog-footer">
+          <button type="button" class="btn-auth-cancel" id="btnAuthCancel">Cancelar</button>
+          <button type="submit" class="btn-auth-submit" id="btnAuthSubmit">
+            <span>Acceder</span> →
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Modal / Drawer Lateral de Configuración Local -->
+    <div class="config-modal-backdrop" id="configModalBackdrop" aria-hidden="true"></div>
+    <section class="config-drawer" id="configDrawer" role="dialog" aria-modal="true" aria-labelledby="configDrawerTitle">
+      <header class="drawer-header">
+        <div class="drawer-title-group">
+          <h2 class="drawer-title" id="configDrawerTitle">⚙️ Panel de Configuración</h2>
+          <span class="config-badge-tag">Modo Local</span>
+        </div>
+        <button type="button" class="drawer-close-btn" id="configDrawerCloseBtn" aria-label="Cerrar panel de configuración">✕</button>
+      </header>
+
+      <div class="drawer-body">
+        <!-- Aviso sobre almacenamiento local vs config.js -->
+        <div class="config-notice-card">
+          <div class="notice-icon">💡</div>
+          <div class="notice-text">
+            <strong>¿Cómo guardar los cambios para siempre?</strong>
+            <p>Los cambios que guardes aquí se almacenan en el <code>localStorage</code> de este navegador para probarlos al instante. Para que se apliquen de forma permanente en <strong>GitHub Pages</strong> para todos tus clientes, contacta con el administrador <code>config.js</code> tel 809-705-7328.</p>
+          </div>
+        </div>
+
+        <form id="configForm" onsubmit="event.preventDefault();">
+          <!-- Pestaña / Sección: Negocio -->
+          <div class="config-section-card">
+            <h3 class="config-card-title">🏪 Información del Negocio</h3>
+            
+            <div class="form-group">
+              <label class="form-label" for="cfgBusinessName">Nombre del Negocio</label>
+              <input type="text" id="cfgBusinessName" class="form-input" placeholder="Ej: Burger & Bites" />
+            </div>
+
+            <!-- Configuración del Logo -->
+            <div class="form-group" style="margin-top: 4px;">
+              <label class="form-label" for="cfgLogo">Logo del Negocio</label>
+              <div class="config-logo-edit-box">
+                <div class="config-logo-preview-box" id="cfgLogoPreviewBox">
+                  <img src="/Menu-digital-01/assets/logo-CO7fBfqo.png" alt="Logo preview" id="cfgLogoPreview" class="config-logo-preview-img" onerror="this.onerror=null; this.parentElement.textContent='🍔';" />
+                </div>
+                <div class="config-logo-controls">
+                  <div class="config-prod-img-row">
+                    <input type="text" id="cfgLogo" class="form-input" placeholder="images/logo.png o emoji 🍔" />
+                    <label class="btn-file-select-label" title="Seleccionar imagen local para el logo">
+                      <span>📁 Subir logo</span>
+                      <input type="file" accept="image/*" id="cfgLogoFileInput" />
+                    </label>
+                  </div>
+                  <span class="file-status-note" id="cfgLogoFileNote">Ruta recomendada en GitHub Pages: <code>images/logo.png</code> o un emoji.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgBusinessTagline">Descripción / Eslogan</label>
+              <input type="text" id="cfgBusinessTagline" class="form-input" placeholder="Ej: Comida deliciosa directo a tu puerta" />
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label" for="cfgWhatsapp">Número de WhatsApp</label>
+                <input type="text" id="cfgWhatsapp" class="form-input" placeholder="Ej: 18095551234" />
+                <span class="input-hint">Código de país + número, sin guiones ni espacios</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cfgCurrency">Moneda</label>
+                <input type="text" id="cfgCurrency" class="form-input" placeholder="Ej: RD$, $, S/." />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgMessageInitial">Mensaje inicial de WhatsApp</label>
+              <input type="text" id="cfgMessageInitial" class="form-input" placeholder="¡Hola! Quiero realizar el siguiente pedido:" />
+            </div>
+          </div>
+
+          <!-- Pestaña / Sección: Delivery -->
+          <div class="config-section-card">
+            <h3 class="config-card-title">🛵 Configuración de Delivery</h3>
+
+            <div class="form-check-group">
+              <label class="form-check-label">
+                <input type="checkbox" id="cfgDeliveryActive" />
+                <span>Cobrar costo de delivery en los pedidos</span>
+              </label>
+            </div>
+
+            <div class="form-row-2" id="deliveryFieldsRow">
+              <div class="form-group">
+                <label class="form-label" for="cfgDeliveryFee">Costo de Envío</label>
+                <input type="number" id="cfgDeliveryFee" class="form-input" min="0" step="10" placeholder="150" />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cfgDeliveryFreeFrom">Delivery Gratis desde (monto)</label>
+                <input type="number" id="cfgDeliveryFreeFrom" class="form-input" min="0" step="100" placeholder="2000 (0 = desactivado)" />
+              </div>
+            </div>
+
+            <div class="form-check-group">
+              <label class="form-check-label">
+                <input type="checkbox" id="cfgDeliveryAlwaysFree" />
+                <span>Delivery siempre gratis (promoción activa)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Pestaña / Sección: Productos -->
+          <div class="config-section-card">
+            <div class="config-header-row">
+              <h3 class="config-card-title">🍔 Gestión de Productos</h3>
+              <button type="button" class="btn-config-add-prod" id="btnAddNewProductModal">
+                <span>+ Nuevo Producto</span>
+              </button>
+            </div>
+
+            <p class="config-card-desc">Edita precios, nombres, categorías, imágenes y disponibilidad. Si desactivas un producto se marcará como <strong>Agotado</strong>.</p>
+            
+            <div class="config-products-list" id="configProductsContainer">
+              <!-- Lista generada dinámicamente -->
+            </div>
+          </div>
+
+          <!-- Modal Interno para Edición / Subida de Imagen -->
+          <div class="image-upload-help-card">
+            <h4>🖼️ Cómo funcionan las imágenes:</h4>
+            <p><strong>Opción A (Recomendada para GitHub Pages):</strong> Guarda tu foto dentro de la carpeta <code>images/</code> (ej: <code>images/mi-plato.jpg</code>) y escribe esa ruta relativa en <code>config.js</code>.</p>
+            <p><strong>Opción B (Vista previa temporal con FileReader):</strong> Puedes elegir un archivo de tu dispositivo para probar cómo se ve en este navegador antes de copiarlo a la carpeta.</p>
+          </div>
+        </form>
+      </div>
+
+      <footer class="drawer-footer config-footer-actions">
+        <button type="button" class="btn-save-config" id="btnSaveConfig">
+          <span>💾 Guardar cambios locales</span>
+        </button>
+        <button type="button" class="btn-restore-config" id="btnRestoreOriginalConfig">
+          <span>🔄 Restaurar configuración de config.js</span>
+        </button>
+      </footer>
+    </section>
+
+    <!-- Contenedor para Notificaciones Toast Flotantes -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Pie de Página -->
+    <footer class="site-footer">
+      <div class="container footer-content">
+        <div class="footer-brand" id="footerBrand">Burger & Bites Delivery</div>
+        <p class="footer-tagline" id="footerTagline">Comida deliciosa directo a tu puerta en minutos</p>
+        
+        <!-- Redes Sociales Dinámicas -->
+        <div class="footer-socials" id="footerSocials">
+          <!-- Botones de redes generados desde CONFIG.redes -->
+        </div>
+
+        <div class="footer-hours">
+          <span>🕒</span>
+          <span id="footerHours">Lunes - Domingo: 5:00 PM - 12:00 PM</span>
+        </div>
+        <p class="footer-copy">© 2026 Menú Digital Delivery. Todos los derechos reservados. Creador (Anyer Perez) /tel: 809-705-7328.</p>
+      </div>
+    </footer>
+
+    <!-- Archivo de Configuración Dinámica -->
+    <script src="./config.js"></script>
+
+    <!-- Lógica Vanilla JavaScript -->
+    <script src="./script.js"></script>
+  </body>
+</html>
+
+
